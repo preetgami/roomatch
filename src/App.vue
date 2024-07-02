@@ -1,14 +1,15 @@
 <template>
-  <HelloWorld msg="Welcome" />
+  <header>
+    <div class="wrapper">
+      <nav>
+        <RouterLink to="/">Home </RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+      </nav>
+    </div>
+  </header>
+
+  <RouterView />
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+<script setup>
+import { RouterLink, RouterView } from "vue-router";
 </script>
