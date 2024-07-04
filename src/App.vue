@@ -1,15 +1,21 @@
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home </RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <div class="min-h-screen">
+    <Navbar />
 
-  <RouterView />
+    <RouterView />
+    <div class="sticky top-[100vh]">
+      <Footerbar />
+    </div>
+  </div>
 </template>
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
+<script>
+import {  RouterView } from "vue-router";
+import Navbar from './views/Navbar.vue';
+import Footerbar from './views/Footerbar.vue'
+export default {
+  components:{
+    Navbar,
+    Footerbar
+  }
+}
 </script>
