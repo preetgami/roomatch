@@ -4,5 +4,5 @@
   </main>
 </template>
 <script setup>
-import NotFoundPage from "@/components/NotFoundPage.vue";
+import NotFoundPage from "@/components/NotFound/NotFoundPage.vue";
 </script>
