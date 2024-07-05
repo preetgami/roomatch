@@ -21,6 +21,7 @@ import SignupScroller from './SignUpScroller.vue'
 
 
 export default {
+  name:'HomePage',
   components:{
     OurServices,
     SignupScroller,

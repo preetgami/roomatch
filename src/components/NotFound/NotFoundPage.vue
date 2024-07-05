@@ -22,4 +22,8 @@
     </RouterLink>
   </div>
 </template>
-<script></script>
+<script>
+export default{
+  name:'NotFoundPage'
+}
+</script>

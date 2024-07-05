@@ -63,3 +63,8 @@
     <br />
   </div>
 </template>
+<script>
+export default{
+ name:'TopHomePage'
+}
+</script>
