@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Homepage snapshot matches 1`] = `
+<!-- HTML -->
+<div class="mt-32 flex flex-col items-center justify-center text-center sm:mt-40">
+  <top-home-page-stub></top-home-page-stub><br><br>
+  <signup-scroller-stub></signup-scroller-stub><br><br><br>
+  <div class="grid grid-cols-2 gap-4">
+    <our-services-stub></our-services-stub>
+  </div><br><br><br><br><br>
+</div>
+`;
