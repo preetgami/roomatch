@@ -13,7 +13,7 @@ describe('Homepage', () => {
     });
 
     it('name matches', () => {
-        expect(HomePage.name).toBe('HomesPage');
+        expect(HomePage.name).toBe('HomePage');
     });
 
     it('snapshot matches', () => {
