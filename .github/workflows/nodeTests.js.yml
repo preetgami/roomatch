@@ -21,10 +21,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/frontend/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+    - name: Set up Node.js ${{ matrix.node-version }} and cache npm dependencies
+      run: |
+        node_version=${{ matrix.node-version }}
+        cache_dir=".npm_cache"
+
+        # Set up Node.js
+        curl -fsSL https://deb.nodesource.com/setup_${node_version}.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+
+        # Set up npm cache
+        npm config set cache ${HOME}/${cache_dir}
+        npm install -g npm@latest
+
+        # Restore npm dependencies from cache or install if cache is not found
+        npm ci
+
+      env:
+        cache_dir: .npm_cache
+      working-directory: ./frontend
     - run: npm ci
     - run: npm run test:unit
