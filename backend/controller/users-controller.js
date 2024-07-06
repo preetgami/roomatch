@@ -4,7 +4,7 @@ const { validationResult } = require("express-validator")
 
 const getUser = async (req, res, next) => {
     const userId = req.params.uid;
-    res.json({ 'name': userId })
+    res.json({ 'name': 'welcome to our page ' + userId })
 }
 
 exports.getUser = getUser

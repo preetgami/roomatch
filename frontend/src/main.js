@@ -11,7 +11,7 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
-
+import store from './store'
 const vuetify = createVuetify({
   components,
   directives,
@@ -24,5 +24,5 @@ app.use(router);
 app.use(vuetify, {
   iconfont: 'mdi'
 });
-
+app.use(store)
 app.mount("#app");
