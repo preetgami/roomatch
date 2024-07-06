@@ -16,12 +16,15 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Navigate into a folder
+        run: cd frontend
+        
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -29,9 +32,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        working-directory: frontend  # Specify the directory where npm commands should run
         run: npm ci
 
       - name: Run tests
-        working-directory: frontend  # Specify the directory where tests should be run
         run: npm run test
