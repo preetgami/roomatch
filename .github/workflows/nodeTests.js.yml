@@ -19,8 +19,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name : Set working Directory
-        working-director: ./frontend
+        
+      - name: Set working Directory
+        working-directory: ./frontend
+        
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
