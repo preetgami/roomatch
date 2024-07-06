@@ -27,6 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Run initialisation and tests
+      working-directory: frontend
       run: |
          npm ci
          npm run test:unit
