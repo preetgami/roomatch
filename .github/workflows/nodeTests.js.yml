@@ -23,7 +23,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Navigate into a folder
-        run: cd frontend
+        run: cd ./frontend
+        
       - name: List files in the folder
         run: ls -l
       - name: Setup Node.js
