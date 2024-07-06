@@ -13,10 +13,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./frontend
     strategy:
       matrix:
         node-version: [18.x]
@@ -27,10 +23,19 @@ jobs:
     - name: Setup up directory
       working-directory: ./frontend
       run: ls
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Setup Node.js in frontend directory
+      run: cd frontend && npm install --no-audit && cd ..
+
+    - name: Use Node.js ${{ matrix.node-version }} in frontend directory
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run test:unit
+
+    - name: Install dependencies in frontend directory
+      working-directory: frontend
+      run: npm ci
+
+    - name: Run tests in frontend directory
+      working-directory: frontend
+      run: npm run test
