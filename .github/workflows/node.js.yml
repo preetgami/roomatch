@@ -26,5 +26,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run test:unit
+   - name: Run initialisation and tests
+     run: |
+         npm ci
+         npm run test:unit
+         working-directory: /frontend
