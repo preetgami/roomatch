@@ -13,19 +13,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    strategy:
       matrix:
         node-version: [18.x]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Navigate into a folder
-        run: | 
-            cd ./frontend
-            ls -l
+      - name : Set working Directory
+        working-director: ./frontend
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
