@@ -28,6 +28,7 @@ jobs:
         cache: 'npm'
     - name: Run initialisation and tests
       run: |
+         cd frontend
          npm ci
          npm run test:unit
-         working-directory: /frontend
+
