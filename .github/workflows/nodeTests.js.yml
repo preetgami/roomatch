@@ -24,7 +24,8 @@ jobs:
 
       - name: Navigate into a folder
         run: cd frontend
-        
+      - name: List files in the folder
+        run: ls -l
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
