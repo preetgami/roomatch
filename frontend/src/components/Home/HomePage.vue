@@ -15,17 +15,16 @@
   </div>
 </template>
 <script>
-import OurServices from './OurServices.vue'
-import TopHomePage from './TopHomePage.vue'
-import SignupScroller from './SignUpScroller.vue'
-
+import OurServices from "./OurServices.vue";
+import TopHomePage from "./TopHomePage.vue";
+import SignupScroller from "./SignUpScroller.vue";
 
 export default {
-  name:'HomePage',
-  components:{
+  name: "HomePage",
+  components: {
     OurServices,
     SignupScroller,
-    TopHomePage
-  }
+    TopHomePage,
+  },
 };
 </script>

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "../store"; // Assuming your Vuex store is in '../store'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,12 +15,32 @@ const router = createRouter({
       component: () => import("../views/LogInView.vue"),
     },
     {
+      path: "/profile",
+      name: "Profile",
+      component: () => import("../views/ProfileView.vue"),
+    },
+    {
+      path: "/signUp",
+      name: "signUp",
+      component: () => import("../views/SignUpView.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "PageNotFound",
       component: () => import("../views/NotFoundView.vue"),
     },
-
   ],
 });
-
+router.beforeEach(async (to, from) => {
+  await store.dispatch("fetchUser");
+  const user = store.getters.getUser?.user?.uid ? true : false;
+  if (
+    !user &&
+    to.name !== "LogIn" &&
+    to.name !== "home" &&
+    to.name !== "signUp"
+  ) {
+    return { name: "LogIn" };
+  }
+});
 export default router;

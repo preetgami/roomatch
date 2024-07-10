@@ -9,13 +9,28 @@
   </div>
 </template>
 <script>
-import {  RouterView } from "vue-router";
-import Navbar from './views/Navbar.vue';
-import Footerbar from './views/Footerbar.vue'
+import { RouterView } from "vue-router";
+import Navbar from "./views/Navbar.vue";
+import { mapActions } from "vuex";
+import Footerbar from "./views/Footerbar.vue";
 export default {
-  components:{
+  components: {
     Navbar,
-    Footerbar
-  }
-}
+    Footerbar,
+  },
+  data() {
+    return {
+      auth: null,
+      isloggedIn: false,
+    };
+  },
+  created() {
+    this.fetchUser();
+  },
+  methods: {
+    ...mapActions({
+      fetchUser: "fetchUser",
+    }),
+  },
+};
 </script>

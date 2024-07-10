@@ -5,9 +5,7 @@
         <h1
           v-for="index in 15"
           :key="index"
-          class="text-black inline-block animate-slide-up-fade
-          bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text
-          p-2 text-lg sm:text-lg md:text-lg font-bold tracking-tighter "
+          class="text-black inline-block animate-slide-up-fade bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text p-2 text-lg sm:text-lg md:text-lg font-bold tracking-tighter"
         >
           Sign<span class="text-coolpink">_</span>up<span class="text-coolpink"
             >_</span
@@ -18,7 +16,7 @@
   </div>
 </template>
 <script>
-export default{
-  name:'SignUpScroller'
-}
+export default {
+  name: "SignUpScroller",
+};
 </script>
