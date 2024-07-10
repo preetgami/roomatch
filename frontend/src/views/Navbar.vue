@@ -1,14 +1,15 @@
 <template>
-  <nav class="bg-white border-gray-200 dark:bg-gray-900 ">
+  <nav class="bg-white border-gray-200 dark:bg-gray-900">
     <div
       class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
     >
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="../assets/logo/roommatch-logo.jpg" class="h-8" />
         <span
-          class="self-center text-2xl font-semibold whitespace-nowrap text-darkblue "
+          class="self-center text-2xl font-semibold whitespace-nowrap text-darkblue"
         >
           Roomatch
+          {{ loggedIn }}
         </span>
       </div>
       <button
@@ -39,23 +40,65 @@
         <ul
           class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
         >
-          <li>
+          <li v-for="(navbar, index) in dynamicNavbarComponents" :key="index">
             <RouterLink
-              to="/"
+              :to="navbar.path"
               class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >Home</RouterLink
+              >{{ navbar.name }}</RouterLink
             >
           </li>
-          <li>
-            <RouterLink
-              to="/login"
+          <li v-if="loggedIn">
+            <button
+              @click="handleLogout"
               class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >Log in</RouterLink
             >
+              Log Out
+            </button>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </template>
-<script></script>
+<script>
+import { mapGetters, mapActions } from "vuex";
+export default {
+  name: "navbar",
+  data() {
+    return {
+      navbarComponents: [
+        { name: "Home", path: "/" },
+        { name: "Log In", path: "/login" },
+      ],
+    };
+  },
+  computed: {
+    ...mapGetters({
+      user: "getUser",
+    }),
+    loggedIn() {
+      return this.user ? true : false;
+    },
+    dynamicNavbarComponents() {
+      return this.loggedIn
+        ? [
+            { name: "Home", path: "/" },
+            { name: "Profile", path: "/profile" },
+          ]
+        : [
+            { name: "Home", path: "/" },
+            { name: "Log In", path: "/login" },
+          ];
+    },
+  },
+  methods: {
+    ...mapActions({
+      logOut: "logOut",
+    }),
+    handleLogout() {
+      this.logOut();
+      this.$router.push("/");
+    },
+  },
+};
+</script>

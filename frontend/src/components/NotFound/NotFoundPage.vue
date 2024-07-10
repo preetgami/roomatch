@@ -3,11 +3,7 @@
     class="mt-32 flex flex-col items-center justify-center text-center sm:mt-40"
   >
     <h1
-      class="
-    text-darkblue inline-block animate-slide-up-fade 
-      bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text 
-      p-2 text-2xl 
-      sm:text-3xl md:text-3xl dark:from-gray-50 dark:to-gray-300 font-bold tracking-tighter text-transparent "
+      class="text-darkblue inline-block animate-slide-up-fade bg-gradient-to-br from-gray-900 to-gray-800 bg-clip-text p-2 text-2xl sm:text-3xl md:text-3xl dark:from-gray-50 dark:to-gray-300 font-bold tracking-tighter text-transparent"
     >
       Oops... We didn't find anything with that result
     </h1>
@@ -23,7 +19,7 @@
   </div>
 </template>
 <script>
-export default{
-  name:'NotFoundPage'
-}
+export default {
+  name: "NotFoundPage",
+};
 </script>
