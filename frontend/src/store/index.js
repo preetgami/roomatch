@@ -40,24 +40,55 @@ const store = createStore({
     },
     async handleLogIn({ commit }, { email, password }) {
       const auth = getAuth();
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      if (response) {
+      try {
+        const response = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
         commit("setUser", response.user);
-      } else {
-        throw new Error("Unable to register user");
+      } catch (error) {
+        console.log(error.code);
+        switch (error.code) {
+          case "auth/invalid-credential":
+            return { text: "Invalid email" };
+          case "auth/user-not-found":
+            return { text: "User Not Found" };
+          case "auth/wrong-password":
+            return { text: "Wrong password" };
+          case "auth/invalid-email":
+            return { text: "Email Not Valid" };
+          case "auth/user-diabled":
+            return { text: "User-disabled" };
+        }
+        return { text: error.code };
       }
     },
     async handleSignUp({ commit }, { email, password, username }) {
       const auth = getAuth();
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      if (response) {
+      try {
+        const response = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
         commit("setUser", response.user);
-      } else {
-        throw new Error("Unable to register user");
+        return true;
+      } catch (error) {
+        switch (error.code) {
+          case "auth/invalid-credential":
+            return { text: "Invalid credential" };
+
+          case "auth/user-not-found":
+            return { text: "User Not Found" };
+          case "auth/invalid-email":
+            return { text: "Email Not Valid" };
+          case "auth/wrong-password":
+            return { text: "Wrong password" };
+          case "auth/user-diabled":
+            return { text: "User-disabled" };
+        }
+        return { text: error.code };
       }
     },
     async logOut({ commit }) {

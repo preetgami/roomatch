@@ -6,13 +6,20 @@
       <div
         class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
       >
+        <div
+          v-if="error"
+          class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+          role="alert"
+        >
+          <span class="font-medium">Danger alert!</span> {{ error }}
+        </div>
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1
             class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
           >
             Sign in to your account
           </h1>
-          <form class="space-y-4 md:space-y-6" action="#" autocomplete="off">
+          <form class="space-y-4 md:space-y-6" action="post" autocomplete="off">
             <div>
               <label
                 for="email"
@@ -49,7 +56,7 @@
             </div>
             <button
               type="submit"
-              class="w-full text-black bg-blue-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              class="w-full text-black bg-coolpink focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               @click.prevent="handleLogIn"
             >
               Sign in
@@ -77,7 +84,7 @@ export default {
     return {
       email: "test@mail.com",
       password: "123456",
-      userName: "",
+      error: "",
     };
   },
   methods: {
@@ -85,8 +92,18 @@ export default {
       logIn: "handleLogIn",
     }),
     async handleLogIn() {
-      await this.logIn({ email: this.email, password: this.password });
-      await this.$router.push("/");
+      const response = await this.logIn({
+        email: this.email,
+        password: this.password,
+      });
+      if (response?.text) {
+        this.error = response?.text;
+        setTimeout(() => {
+          this.error = null;
+        }, 5000);
+      } else {
+        await this.$router.push("/match");
+      }
     },
     switchToSignUp() {
       this.$router.push("/signUp");
