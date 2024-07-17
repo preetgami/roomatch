@@ -25,6 +25,11 @@ const router = createRouter({
       component: () => import("../views/SignUpView.vue"),
     },
     {
+      path: "/match",
+      name: "Match",
+      component: () => import("../views/MatchView.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "PageNotFound",
       component: () => import("../views/NotFoundView.vue"),
@@ -33,7 +38,7 @@ const router = createRouter({
 });
 router.beforeEach(async (to, from) => {
   await store.dispatch("fetchUser");
-  const user = store.getters.getUser?.user?.uid ? true : false;
+  const user = (await store.getters.getUser?.user?.uid) ? true : false;
   if (
     !user &&
     to.name !== "LogIn" &&

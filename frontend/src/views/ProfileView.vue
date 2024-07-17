@@ -1,4 +1,8 @@
 <template>
-  <main>must be logged innn</main>
+  <main>
+    <ProfilePage />
+  </main>
 </template>
-<script setup></script>
+<script setup>
+import ProfilePage from "@/components/Profile/ProfilePage.vue";
+</script>

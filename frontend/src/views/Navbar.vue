@@ -9,7 +9,6 @@
           class="self-center text-2xl font-semibold whitespace-nowrap text-darkblue"
         >
           Roomatch
-          {{ loggedIn }}
         </span>
       </div>
       <button
@@ -82,7 +81,7 @@ export default {
     dynamicNavbarComponents() {
       return this.loggedIn
         ? [
-            { name: "Home", path: "/" },
+            { name: "Match", path: "/match" },
             { name: "Profile", path: "/profile" },
           ]
         : [
