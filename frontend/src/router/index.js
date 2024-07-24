@@ -36,16 +36,20 @@ const router = createRouter({
     },
   ],
 });
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to, from, next) => {
   await store.dispatch("fetchUser");
-  const user = (await store.getters.getUser?.user?.uid) ? true : false;
+  const user = await store.getters.getUser?.user?.uid;
+
   if (
     !user &&
     to.name !== "LogIn" &&
     to.name !== "home" &&
     to.name !== "signUp"
   ) {
-    return { name: "LogIn" };
+    console.log(user);
+    next({ name: "LogIn" });
+  } else {
+    next();
   }
 });
 export default router;

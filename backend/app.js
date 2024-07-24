@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user-routes");
+const s3Routes = require("./routes/s3-routes");
 const HttpError = require("./models/http-error");
 require("dotenv").config();
 const port = process.env.PORT;
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/s3", s3Routes);
 
 app.use((req, res, next) => {
   const error = new HttpError("NO ROUTES LIKE THIS EXISTS!", 404);

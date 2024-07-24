@@ -1,6 +1,4 @@
 <template>
-  <!-- HTML -->
-
   <div
     class="mt-32 flex flex-col items-center justify-center text-center sm:mt-40"
   >
@@ -19,6 +17,7 @@ import OurServices from "./OurServices.vue";
 import TopHomePage from "./TopHomePage.vue";
 import SignupScroller from "./SignUpScroller.vue";
 
+
 export default {
   name: "HomePage",
   components: {
@@ -26,5 +25,6 @@ export default {
     SignupScroller,
     TopHomePage,
   },
+
 };
 </script>

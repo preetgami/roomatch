@@ -6,10 +6,10 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   name: { type: String, required: true },
   uid: { type: String, required: true },
-  age: { type: Number, required: true },
-  location: { type: String, required: true },
-  career: { type: String, required: true },
-  hobby: [{ type: String, required: true }],
+  age: { type: Number },
+  location: { type: String },
+  career: { type: String },
+  hobby: [{ type: String }],
   description: { type: String },
   likes: {
     type: Map,
@@ -23,6 +23,7 @@ const UserSchema = new Schema({
     required: true,
     default: new Map(),
   },
+  pictures: [{ type: String }],
 });
 UserSchema.plugin(unquieValid);
 

@@ -32,6 +32,8 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
+import "../node_modules/flowbite-vue/dist/index.css";
+
 app.use(createPinia());
 app.use(router);
 app.use(vuetify, {

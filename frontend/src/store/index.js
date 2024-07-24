@@ -10,9 +10,8 @@ import {
 
 const store = createStore({
   state: {
-    uid: "hghg",
-    userName: "test",
-    loggedIn: false,
+    userProfile: {},
+    recommendation: {},
     user: {
       loggedIn: false,
       data: null,
@@ -22,6 +21,12 @@ const store = createStore({
     getUser(state) {
       return state.user;
     },
+    getProfile(state) {
+      return state.userProfile;
+    },
+    getRecommendation(state) {
+      return state.recommendation;
+    },
   },
   mutations: {
     setUser(state, user) {
@@ -30,14 +35,63 @@ const store = createStore({
     logInUser(state, value) {
       state.user.loggedIn = value;
     },
+    setUserProfile(state, profile) {
+      state.userProfile = profile;
+    },
+    setRecommendation(state, newRec) {
+      state.recommendation = newRec;
+    },
   },
   actions: {
-    findusers({ commit }, newUser = "hi") {
-      const endpoint = "http://localhost:4000/api/users/user/" + newUser;
-      axios.get(endpoint).then((response) => {
-        commit("updateUser", response.data.name);
+    //user routes
+
+    //returns profile info eg name, hobby, pics etc
+    async fetchUserProfile({ state, commit }) {
+      const endpoint =
+        "http://localhost:4000/api/users/user/" + state.user.user.uid;
+      await axios.get(endpoint).then((response) => {
+        commit("setUserProfile", response.data);
       });
     },
+    async fetchRecommendation({ commit, state }) {
+      const endpoint =
+        "http://localhost:4000/api/users/user/recommendation/" +
+        state.user.user.uid;
+      await axios.get(endpoint).then((response) => {
+        commit("setRecommendation", response.data);
+      });
+    },
+    createUser({ commit, state }, newInfo) {
+      newInfo = { ...newInfo, uid: state.user.user.uid };
+      const endpoint =
+        "http://localhost:4000/api/users/user/create/" + state.user.user.uid;
+      axios.post(endpoint, newInfo).then((response) => {
+        console.log(response.data);
+      });
+    },
+    updateUser({ commit, state }, newInfo) {
+      newInfo = { ...newInfo, uid: state.user.user.uid };
+      const endpoint =
+        "http://localhost:4000/api/users/user/update/" + state.user.user.uid;
+      axios.patch(endpoint, newInfo).then((response) => {
+        console.log(response.data);
+      });
+    },
+    likeUser({ state }, usertoLike) {
+      const endpoint =
+        "http://localhost:4000/api/users/user/swipe/" + state.user.user.uid;
+      axios.patch(endpoint, { like: usertoLike }).then((response) => {
+        console.log(response.data);
+      });
+    },
+    rejectUser({ state }, usertoReject) {
+      const endpoint =
+        "http://localhost:4000/api/users/user/reject/" + state.user.user.uid;
+      axios.patch(endpoint, { reject: usertoReject }).then((response) => {
+        console.log(response.data);
+      });
+    },
+
     async handleLogIn({ commit }, { email, password }) {
       const auth = getAuth();
       try {
@@ -64,7 +118,7 @@ const store = createStore({
         return { text: error.code };
       }
     },
-    async handleSignUp({ commit }, { email, password, username }) {
+    async handleSignUp({ commit, dispatch }, { email, password, username }) {
       const auth = getAuth();
       try {
         const response = await createUserWithEmailAndPassword(
@@ -72,6 +126,10 @@ const store = createStore({
           email,
           password
         );
+        let profile = {
+          name: username,
+        };
+        dispatch("createUser", { ...profile });
         commit("setUser", response.user);
         return true;
       } catch (error) {
@@ -107,6 +165,34 @@ const store = createStore({
           commit("setUser", null);
         }
       });
+    },
+    async uploadImage({ commit, state, dispatch }, { file }) {
+      console.log(state.userProfile);
+      if (state.userProfile.user[0].pictures.length >= 5) {
+        return;
+      }
+      const endpoint = "http://localhost:4000/api/s3/" + state.user.user.uid;
+      let url;
+      await axios.get(endpoint).then((response) => {
+        url = response.data.url;
+      });
+      // console.log(url);
+      axios({
+        method: "put",
+        url: url,
+        data: file,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      const imageUrl = url.split("?")[0];
+      dispatch("saveImage", { url: imageUrl });
+    },
+    async saveImage({ commit, state }, url) {
+      const endpoint =
+        "http://localhost:4000/api/s3/upload/" + state.user.user.uid;
+      await axios.patch(endpoint, url).then((response) => {
+        url = response.data.url;
+      });
+      console.log(url);
     },
   },
 });
