@@ -30,6 +30,11 @@ const router = createRouter({
       component: () => import("../views/MatchView.vue"),
     },
     {
+      path: "/yourmatch",
+      name: "Matched",
+      component: () => import("../views/MatchedView.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "PageNotFound",
       component: () => import("../views/NotFoundView.vue"),
@@ -46,7 +51,6 @@ router.beforeEach(async (to, from, next) => {
     to.name !== "home" &&
     to.name !== "signUp"
   ) {
-    console.log(user);
     next({ name: "LogIn" });
   } else {
     next();

@@ -89,9 +89,10 @@ const swipeUser = async (req, res, next) => {
     if (!user.likes.has(like)) {
       user.likes.set(like, likedUserId);
       await user.save();
-    } else if (userLiked.likes.has(user.uid)) {
-      res.json({ message: "You have matched!!" });
-      return;
+      if (userLiked.likes.has(user.uid)) {
+        user.matches.set(like, likedUserId);
+        await user.save();
+      }
     } else {
       const error = new Httperror("already liked this user", 400);
       return next(error);
@@ -113,7 +114,7 @@ const getRecommendation = async (req, res, next) => {
     }
     const recommendations = await User.find({
       uid: { $ne: currentUser.uid },
-      location: currentUser.location,
+      location: { $regex: new RegExp(currentUser.location, "i") },
       age: { $gte: currentUser.age - 5, $lte: currentUser.age + 5 },
     });
     const filteredRecommendations = recommendations.filter((user) => {

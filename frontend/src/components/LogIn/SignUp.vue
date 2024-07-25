@@ -105,16 +105,16 @@ export default {
     ...mapActions({
       signUp: "handleSignUp",
       createUser: "createUser",
-
     }),
     async handleSignUp() {
       let response;
-      if(this.userName ){
-      response = await this.signUp({
-        email: this.email,
-        password: this.password,
-        username: this.userName,
-      });}
+      if (this.userName) {
+        response = await this.signUp({
+          email: this.email,
+          password: this.password,
+          username: this.userName,
+        });
+      }
       if (response?.text) {
         this.error = response?.text;
         setTimeout(() => {

@@ -4,7 +4,7 @@
     <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
       <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
         Update profile
-        {{ updated?'✅':'' }}
+        {{ updated ? "✅" : "" }}
       </h2>
       <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
         <div class="sm:col-span-2">
@@ -91,7 +91,7 @@
               </span>
             </li>
           </ul>
-          <p class="text-red-500 " v-if="diasbleAdding">No more allowed</p>
+          <p class="text-red-500" v-if="diasbleAdding">No more allowed</p>
         </div>
         <form id="imageForm">
           <input
@@ -117,16 +117,13 @@
       <div class="flex items-center space-x-4">
         <button
           @click="update"
-          class="text-white
-            text-black bg-coolpink focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          class="text-white text-black bg-coolpink focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
         >
           Update Profile
         </button>
         <button
           :disabled="!imageSelected"
-          class="
-          disabled:bg-gray-400 disabled:pointer-events-none
-          text-white bg-coolpink focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          class="disabled:bg-gray-400 disabled:pointer-events-none text-white bg-coolpink focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
           @click="submit"
         >
           Upload Image
@@ -136,85 +133,82 @@
   </section>
 </template>
 <script>
-import { mapActions,mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "ProfilePage",
-  data(){
-    return{
+  data() {
+    return {
       profile: {
-      name:"",
-      age:"",
-      location:"",
-      career:"",
-      hobby:[],
+        name: "",
+        age: "",
+        location: "",
+        career: "",
+        hobby: [],
       },
-      updated:false,
-      diasbleAdding:false,
-      diasbleAddingPics:false,
-      newHobby:'',
-      imageSelected: false
-
-    }
+      updated: false,
+      diasbleAdding: false,
+      diasbleAddingPics: false,
+      newHobby: "",
+      imageSelected: false,
+    };
   },
-  computed:{
+  computed: {
     ...mapGetters({
-      getProfile:"getProfile"
-    })
-
+      getProfile: "getProfile",
+    }),
   },
-  async mounted(){
+  async mounted() {
     await this.fetchUserProfile();
-    if (this.getProfile?.user.length>=1){
-      this.profile=this.getProfile.user[0]
+    if (this.getProfile?.user.length >= 1) {
+      this.profile = this.getProfile.user[0];
     }
   },
-  methods:{
-   ...mapActions({
+  methods: {
+    ...mapActions({
       createUser: "createUser",
-      updateUser:"updateUser",
-      fetchUserProfile:"fetchUserProfile",
+      updateUser: "updateUser",
+      fetchUserProfile: "fetchUserProfile",
       uplaod: "uploadImage",
     }),
     checkFile(event) {
       const file = event.target.files[0];
-      if (file && file.type.startsWith('image/')) {
+      if (file && file.type.startsWith("image/")) {
         this.imageSelected = true;
       } else {
         this.imageSelected = false;
       }
     },
     addHobby() {
-      if (this.profile.hobby.length>=6){
-        this.diasbleAdding=true
-        return
+      if (this.profile.hobby.length >= 6) {
+        this.diasbleAdding = true;
+        return;
       }
-      if (this.newHobby.trim() !== '') {
+      if (this.newHobby.trim() !== "") {
         this.profile.hobby.push(this.newHobby);
-        this.newHobby = '';
+        this.newHobby = "";
       }
     },
-    deleteHobby(i){
-      this.profile.hobby.splice(i,1);
+    deleteHobby(i) {
+      this.profile.hobby.splice(i, 1);
     },
-    async submit(){
-       if (this.imageSelected){
-      event.preventDefault()
-      const file = imageInput.files[0]
-      if (this.profile.pictures.length>=5){
-        this.diasbleAddingPics=true
-        return
+    async submit() {
+      if (this.imageSelected) {
+        event.preventDefault();
+        const file = imageInput.files[0];
+        if (this.profile.pictures.length >= 5) {
+          this.diasbleAddingPics = true;
+          return;
+        }
+        await this.uplaod({ file });
+        await this.fetchUserProfile();
       }
-      await this.uplaod({file})
-      await this.fetchUserProfile()
-    }
     },
-    async update(){
-      await this.updateUser(this.profile)
-      this.updated=true
-      await this.fetchUserProfile()
-
+    async update() {
+      await this.updateUser(this.profile);
+      this.updated = true;
+      await this.fetchUserProfile();
     },
-  }
+  },
 };
 </script>
