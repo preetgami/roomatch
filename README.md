@@ -17,3 +17,4 @@ https://github.com/user-attachments/assets/04c27327-a76f-4aeb-b20d-910015372e46
 - AWS S3
 - Github Actions
 - Firebase Auth
+- Docker (yet to be added)
