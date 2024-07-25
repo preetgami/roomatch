@@ -17,7 +17,6 @@ import OurServices from "./OurServices.vue";
 import TopHomePage from "./TopHomePage.vue";
 import SignupScroller from "./SignUpScroller.vue";
 
-
 export default {
   name: "HomePage",
   components: {
@@ -25,6 +24,5 @@ export default {
     SignupScroller,
     TopHomePage,
   },
-
 };
 </script>

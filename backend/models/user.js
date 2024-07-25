@@ -23,6 +23,12 @@ const UserSchema = new Schema({
     required: true,
     default: new Map(),
   },
+  matches: {
+    type: Map,
+    of: { type: mongoose.Types.ObjectId, ref: "User" },
+    required: true,
+    default: new Map(),
+  },
   pictures: [{ type: String }],
 });
 UserSchema.plugin(unquieValid);

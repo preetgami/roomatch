@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type,Accept, Authorization,"
+    "Origin, X-Requested-With, Content-Type,Accept, Authorization,",
   );
   res.setHeader("Access-Control-Allow-Methods", "GET,POST, PATCH, DELETE");
   next();
@@ -38,7 +38,7 @@ app.use((error, req, res, next) => {
 });
 mongoose
   .connect(
-    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.klcc3ue.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.klcc3ue.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,
   )
   .then(() => app.listen(port))
   .then(() => console.log("listening..."))

@@ -30,6 +30,7 @@ export default {
       darkblue: "#151d2c",
       coolpink: "#fe3c72",
       babypink: "	#ef4a75",
+      coolyellow: "#ffcb37",
     },
     extend: {
       animation: {

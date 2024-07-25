@@ -77,17 +77,17 @@ const store = createStore({
         console.log(response.data);
       });
     },
-    likeUser({ state }, usertoLike) {
+    async likeUser({ state }, usertoLike) {
       const endpoint =
         "http://localhost:4000/api/users/user/swipe/" + state.user.user.uid;
-      axios.patch(endpoint, { like: usertoLike }).then((response) => {
+      await axios.patch(endpoint, { like: usertoLike }).then((response) => {
         console.log(response.data);
       });
     },
-    rejectUser({ state }, usertoReject) {
+    async rejectUser({ state }, usertoReject) {
       const endpoint =
         "http://localhost:4000/api/users/user/reject/" + state.user.user.uid;
-      axios.patch(endpoint, { reject: usertoReject }).then((response) => {
+      await axios.patch(endpoint, { reject: usertoReject }).then((response) => {
         console.log(response.data);
       });
     },

@@ -6,7 +6,7 @@
     >
       <!-- Background Image -->
       <div
-        :style="{ backgroundImage: 'url(' +  + ')' }"
+        :style="{ backgroundImage: 'url(' + profile?.pictures?.[1] + ')' }"
         class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-cover bg-clip-border bg-center text-gray-700 shadow-none"
       >
         <!-- Gradient Overlay -->
@@ -37,6 +37,7 @@
         <!-- Profile Image -->
         <!-- :src="profile.pictures[0]"-->
         <img
+          :src="profile?.pictures?.[0]"
           :alt="profile.name"
           class="relative inline-block h-[74px] w-[74px] !rounded-full border-2 border-white object-cover object-center"
         />
@@ -47,8 +48,8 @@
 <script>
 export default {
   name: "MatchCard",
-  props:{
-    profile: Object
-  }
+  props: {
+    profile: Object,
+  },
 };
 </script>

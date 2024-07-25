@@ -81,8 +81,10 @@ export default {
     dynamicNavbarComponents() {
       return this.loggedIn
         ? [
-            { name: "Match", path: "/match" },
+            { name: "Find", path: "/match" },
+            { name: "Your Matches", path: "/yourmatch" },
             { name: "Profile", path: "/profile" },
+
           ]
         : [
             { name: "Home", path: "/" },
