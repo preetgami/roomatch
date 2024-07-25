@@ -1,6 +1,8 @@
 # RooMatch
 
 The easy way to find roomates!
+Looking for the perfect roommate? 🏠✨ Discover an effortless way to find your ideal match! This platform connects you with potential roommates based on shared interests, lifestyle preferences, and location.
+🙌🔍 Put the doom scrolling to use till you find the one, stress-free roommate matching. 🌟👫 
 
 ## DEMO
 
