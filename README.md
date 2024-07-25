@@ -12,8 +12,3 @@ https://github.com/user-attachments/assets/d66af092-1199-4bfe-bb5f-8fe72f121318
 - AWS S3
 - Github Actions
 - Firebase Auth
-
-### Project structure
-├── frontend                   
-├── backend                
-└── README.md
