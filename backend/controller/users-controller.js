@@ -91,6 +91,7 @@ const swipeUser = async (req, res, next) => {
       await user.save();
       if (userLiked.likes.has(user.uid)) {
         user.matches.set(like, likedUserId);
+        userLiked.set(uid, user._id);
         await user.save();
       }
     } else {
