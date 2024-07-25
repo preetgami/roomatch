@@ -16,6 +16,7 @@ const store = createStore({
       loggedIn: false,
       data: null,
     },
+    matches: [],
   },
   getters: {
     getUser(state) {
@@ -26,6 +27,9 @@ const store = createStore({
     },
     getRecommendation(state) {
       return state.recommendation;
+    },
+    getMatches(state) {
+      return state.matches;
     },
   },
   mutations: {
@@ -41,6 +45,9 @@ const store = createStore({
     setRecommendation(state, newRec) {
       state.recommendation = newRec;
     },
+    setMatches(state, matches) {
+      state.matches = matches;
+    },
   },
   actions: {
     //user routes
@@ -52,6 +59,17 @@ const store = createStore({
       await axios.get(endpoint).then((response) => {
         commit("setUserProfile", response.data);
       });
+    },
+    async fetchMatches({ state, commit }) {
+      const matches = state.userProfile.user?.[0]?.matches;
+      const all_matches = [];
+      for (let user in matches) {
+        const endpoint = "http://localhost:4000/api/users/user/" + user;
+        await axios.get(endpoint).then((response) => {
+          all_matches.push(response.data.user[0]);
+        });
+      }
+      commit("setMatches", all_matches);
     },
     async fetchRecommendation({ commit, state }) {
       const endpoint =
@@ -167,7 +185,6 @@ const store = createStore({
       });
     },
     async uploadImage({ commit, state, dispatch }, { file }) {
-      console.log(state.userProfile);
       if (state.userProfile.user[0].pictures.length >= 5) {
         return;
       }
@@ -176,7 +193,6 @@ const store = createStore({
       await axios.get(endpoint).then((response) => {
         url = response.data.url;
       });
-      // console.log(url);
       axios({
         method: "put",
         url: url,
@@ -192,7 +208,6 @@ const store = createStore({
       await axios.patch(endpoint, url).then((response) => {
         url = response.data.url;
       });
-      console.log(url);
     },
   },
 });

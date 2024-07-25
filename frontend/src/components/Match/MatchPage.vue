@@ -38,9 +38,6 @@
       </svg>
       <span>Accept</span>
     </button>
-    {{ changed }}
-
-    <!-- <pre>{{profile}}</pre> -->
   </div>
   <div v-else class="flex flex-col items-center">
     <h1
