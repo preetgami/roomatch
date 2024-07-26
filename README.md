@@ -3,10 +3,10 @@ This project allows people to easily find roomates by Connecting you with potent
 Put the doom scrolling to use and find a decent roommate for your upcoming semester.👫 </br>
 
 ## Table of Contents
-- [Features](https://github.com/preetgami/roomatch/edit/main/README.md#table-of-contents)
-- [Demo](https://github.com/preetgami/roomatch/edit/main/README.md#table-of-contents)
-- [Getting Started using docker](https://github.com/preetgami/roomatch/edit/main/README.md#table-of-contents)
-- [Tech stack](https://github.com/preetgami/roomatch/edit/main/README.md#table-of-contents)
+- [Features](https://github.com/preetgami/roomatch/blob/main/README.md#features)
+- [Demo](https://github.com/preetgami/roomatch/blob/main/README.md#demo)
+- [Getting Started using docker](https://github.com/preetgami/roomatch/blob/main/README.md#getting-started)
+- [Tech stack](https://github.com/preetgami/roomatch/blob/main/README.md#tech-stack)
 
 ## Features
 - Use AWS S3 for secure profile management and image storage.
