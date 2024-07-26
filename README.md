@@ -10,7 +10,7 @@ Put the doom scrolling to use till you find the one, stress-free roommate matchi
 https://github.com/user-attachments/assets/04c27327-a76f-4aeb-b20d-910015372e46
 
 ## how to set up
-1. clone the repo then run the following
+1. Clone the repo then run the following
 ```
 cd frontend
 cp sample.env .env
