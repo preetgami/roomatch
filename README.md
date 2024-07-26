@@ -1,10 +1,7 @@
 # Roomatch
-
-The easy way to find roomates!</br>
-Looking for the perfect roommate? </br>
-Discover an effortless way to find your ideal match!✨</br> 
-This platform connects you with potential roommates based on shared interests, lifestyle preferences, and location.🔍</br>
-Put the doom scrolling to use till you find the one, stress-free roommate matching.👫 </br>
+This project allows people to easily find roomates!
+It is an effortless way to find your ideal match!✨ Connecting you with potential roommates based on shared interests, lifestyle preferences, and location.🔍
+Put the doom scrolling to use and find a decent roommate for your upcoming semester.👫 </br>
 
 ## DEMO
 https://github.com/user-attachments/assets/04c27327-a76f-4aeb-b20d-910015372e46
