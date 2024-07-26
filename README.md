@@ -5,7 +5,7 @@ Put the doom scrolling to use and find a decent roommate for your upcoming semes
 ## DEMO
 https://github.com/user-attachments/assets/04c27327-a76f-4aeb-b20d-910015372e46
 
-## how to set up
+## SET UP
 1. Clone the repo
 ```
 git clone https://github.com/preetgami/roomatch
@@ -23,6 +23,7 @@ cd ..
 3.. Supply the env vars. 
 For `frontend` you require [firebase auth](https://firebase.google.com/docs/auth).
 For `backend` you require a [Mongodb collection](https://www.mongodb.com/) and an [aws s3 bucket](https://aws.amazon.com/s3/).
+
 
 4. Finaly run
 ```
