@@ -82,8 +82,8 @@ export default {
   name: "LogInPage",
   data() {
     return {
-      email: "test@mail.com",
-      password: "123456",
+      email: "",
+      password: "",
       error: "",
     };
   },

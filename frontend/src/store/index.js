@@ -55,7 +55,10 @@ const store = createStore({
     //returns profile info eg name, hobby, pics etc
     async fetchUserProfile({ state, commit }) {
       const endpoint =
-        "http://localhost:4000/api/users/user/" + state.user.user.uid;
+        "http://localhost:" +
+        import.meta.env.VITE_PORT +
+        "/api/users/user/" +
+        state.user.user.uid;
       await axios.get(endpoint).then((response) => {
         commit("setUserProfile", response.data);
       });
@@ -64,7 +67,11 @@ const store = createStore({
       const matches = state.userProfile.user?.[0]?.matches;
       const all_matches = [];
       for (let user in matches) {
-        const endpoint = "http://localhost:4000/api/users/user/" + user;
+        const endpoint =
+          "http://localhost:" +
+          import.meta.env.VITE_PORT +
+          "/api/users/user/" +
+          user;
         await axios.get(endpoint).then((response) => {
           all_matches.push(response.data.user[0]);
         });
@@ -73,7 +80,9 @@ const store = createStore({
     },
     async fetchRecommendation({ commit, state }) {
       const endpoint =
-        "http://localhost:4000/api/users/user/recommendation/" +
+        "http://localhost:" +
+        import.meta.env.VITE_PORT +
+        "/api/users/user/recommendation/" +
         state.user.user.uid;
       await axios.get(endpoint).then((response) => {
         commit("setRecommendation", response.data);
@@ -82,7 +91,10 @@ const store = createStore({
     createUser({ commit, state }, newInfo) {
       newInfo = { ...newInfo, uid: state.user.user.uid };
       const endpoint =
-        "http://localhost:4000/api/users/user/create/" + state.user.user.uid;
+        "http://localhost:" +
+        import.meta.env.VITE_PORT +
+        "/api/users/user/create/" +
+        state.user.user.uid;
       axios.post(endpoint, newInfo).then((response) => {
         console.log(response.data);
       });
@@ -90,21 +102,30 @@ const store = createStore({
     updateUser({ commit, state }, newInfo) {
       newInfo = { ...newInfo, uid: state.user.user.uid };
       const endpoint =
-        "http://localhost:4000/api/users/user/update/" + state.user.user.uid;
+        "http://localhost:" +
+        import.meta.env.VITE_PORT +
+        "/api/users/user/update/" +
+        state.user.user.uid;
       axios.patch(endpoint, newInfo).then((response) => {
         console.log(response.data);
       });
     },
     async likeUser({ state }, usertoLike) {
       const endpoint =
-        "http://localhost:4000/api/users/user/swipe/" + state.user.user.uid;
+        "http://localhost:" +
+        import.meta.env.VITE_PORT +
+        "/api/users/user/swipe/" +
+        state.user.user.uid;
       await axios.patch(endpoint, { like: usertoLike }).then((response) => {
         console.log(response.data);
       });
     },
     async rejectUser({ state }, usertoReject) {
       const endpoint =
-        "http://localhost:4000/api/users/user/reject/" + state.user.user.uid;
+        "http://localhost:" +
+        import.meta.env.VITE_PORT +
+        "/api/users/user/reject/" +
+        state.user.user.uid;
       await axios.patch(endpoint, { reject: usertoReject }).then((response) => {
         console.log(response.data);
       });
@@ -188,7 +209,11 @@ const store = createStore({
       if (state.userProfile.user[0].pictures.length >= 5) {
         return;
       }
-      const endpoint = "http://localhost:4000/api/s3/" + state.user.user.uid;
+      const endpoint =
+        "http://localhost:" +
+        import.meta.env.VITE_PORT +
+        "/api/s3/" +
+        state.user.user.uid;
       let url;
       await axios.get(endpoint).then((response) => {
         url = response.data.url;
@@ -204,7 +229,10 @@ const store = createStore({
     },
     async saveImage({ commit, state }, url) {
       const endpoint =
-        "http://localhost:4000/api/s3/upload/" + state.user.user.uid;
+        "http://localhost:" +
+        import.meta.env.VITE_PORT +
+        "/api/s3/upload/" +
+        state.user.user.uid;
       await axios.patch(endpoint, url).then((response) => {
         url = response.data.url;
       });

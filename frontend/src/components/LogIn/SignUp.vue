@@ -95,8 +95,8 @@ export default {
   name: "SignUp",
   data() {
     return {
-      email: "test@mail.com",
-      password: "123456",
+      email: "",
+      password: "",
       userName: "",
       error: "",
     };
