@@ -14,7 +14,7 @@ Put the doom scrolling to use and find a decent roommate for your upcoming semes
 - Match Interaction: Facilitate seamless viewing and connection with potential matches.
 - Secure Authentication: Employ Firebase Authentication for robust and secure user sign-up and login.
 - CI/CD with GitHub Actions: Implemented using GitHub Actions to automate and streamline the development workflow.
-- Docker Integration: Utilized Docker to simplify installation and ensure consistent development environments for all devs.
+- Docker: Utilized Docker to simplify installation and ensure consistent development environments for all devs.
 
 ## Demo
 https://github.com/user-attachments/assets/04c27327-a76f-4aeb-b20d-910015372e46
